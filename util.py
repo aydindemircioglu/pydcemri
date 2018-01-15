@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 # Utilities for MRI postprocessing
 #
 # Copyright (C) 2014   David S. Smith
@@ -29,10 +31,9 @@ def status_check(k, N, tstart, nupdates=10):
         telapsed = time.time() - tstart
         ttotal = telapsed * 100.0 / pct_complete
         trem = ttotal - telapsed
-        print '%.0f%% complete, %d of %d s remain' % \
-            (pct_complete, trem, ttotal)
+        print ('%.0f%% complete, %d of %d s remain') % (pct_complete, trem, ttotal)
     if k == N - 1:
-        print '%d s elapsed' % (time.time() - tstart) 
+        print ('%d s elapsed') % (time.time() - tstart) 
 
 
 
@@ -66,12 +67,14 @@ def mosaic(img):
     n = int(floor(sqrt(nz)))  # starting guess for tiling dimensions
     # find largest integer less than or equal to sqrt that evenly divides the
     # number of 2-d images in the n-d image.
-    m = [x for x in xrange(1, n+1) if nz % x == 0]
+    m = [x for x in list(range(1, n+1)) if nz % x == 0]
     m = m[-1]
     j = nz / m      # figure out the most square dimensions
-    n2 = min(j, m)
-    n1 = max(j, m)
-    M = zeros((nr*n2, nc*n1), dtype=img.dtype)
+    n2 = int(min(j, m))
+    n1 = int(max(j, m))
+    #print (nr*n2)
+    #print (nc*n1)
+    M = zeros((int(nr*n2), int(nc*n1)), dtype=img.dtype)
     for j2 in range(n2):      # stick them together
         for j1 in range(n1):  # there is probably a better way to do this
             rows = nr*j2 + arange(nr)

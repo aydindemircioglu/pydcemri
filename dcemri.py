@@ -25,7 +25,7 @@ from pylab import *
 from scipy.integrate import cumtrapz, simps
 from scipy.optimize import curve_fit
 from skimage.filters import threshold_otsu 
-from numpy import sqrt
+from numpy import sqrt, zeros, reshape, prod, exp, sin, cos, log, zeros_like, ones
 
 
 def status_check(k, N, tstart, nupdates=10):
